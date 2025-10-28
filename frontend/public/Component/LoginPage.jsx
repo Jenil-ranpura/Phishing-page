@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config();
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -16,7 +18,7 @@ const LoginPage = () => {
     const startTime = Date.now();
 
     try {
-      let response = await axios.post("http://localhost:3000/", {
+      let response = await axios.post(process.env.BACKEND_URL, {
         username,
         password,
       });
