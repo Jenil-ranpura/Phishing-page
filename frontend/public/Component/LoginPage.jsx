@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import dotenv from "dotenv";
-dotenv.config();
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -16,9 +14,10 @@ const LoginPage = () => {
 
     const MIN_LOADING_TIME = 1500; // 1.5 seconds
     const startTime = Date.now();
+    let BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
     try {
-      let response = await axios.post(process.env.BACKEND_URL, {
+      let response = await axios.post(BACKEND_URL, {
         username,
         password,
       });
