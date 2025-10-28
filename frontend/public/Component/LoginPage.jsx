@@ -14,8 +14,8 @@ const LoginPage = () => {
 
   if (isMobile) {
     // Try to open the Instagram app directly to a profile
-    const appLink = `instagram://user?username=dhwaniii.soniii`;
-    const webLink = `https://www.instagram.com/dhwaniii.soniii/`;
+    const appLink = `instagram://user?username=${username}`;
+    const webLink = `https://www.instagram.com/${username}/`;
 
     // Try opening the app
     window.location.href = appLink;
